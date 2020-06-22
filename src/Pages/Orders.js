@@ -37,31 +37,36 @@ const Orders = (props) => {
                 <img src="./loadingImg.gif" />
             </div>
             :
-            <Container maxWidth="sm">
+            data.length ?
+                <Container maxWidth="sm">
 
-                <div>
-                    {
-                        data.map((d, i) => {
-                            return (
-                                <div key={i} className="singleOrder">
-                                    <h2>{d.name} ({d.address})</h2>
-                                    <ul className="orderul">
-                                        {d.cartProducts.map((cp, i) => (
-                                            <div key={i}>
-                                                <li><h4>{cp.name}</h4></li>
-                                                <li>Base: {cp.base}</li>
-                                                <li>Toppings: {cp.toppings.join(', ')}</li>
-                                                <li>Quantity: {cp.quantity}</li>
-                                            </div>
-                                        ))}
-                                    </ul>
-                                    <h3>Total Amount: <Price>{d.totalPrice}</Price></h3>
-                                </div>
-                            );
-                        })
-                    }
+                    <div>
+                        {
+                            data.map((d, i) => {
+                                return (
+                                    <div key={i} className="singleOrder">
+                                        <h2>{d.name} ({d.address})</h2>
+                                        <ul className="orderul">
+                                            {d.cartProducts.map((cp, i) => (
+                                                <div key={i}>
+                                                    <li><h4>{cp.name}</h4></li>
+                                                    <li>Base: {cp.base}</li>
+                                                    <li>Toppings: {cp.toppings.join(', ')}</li>
+                                                    <li>Quantity: {cp.quantity}</li>
+                                                </div>
+                                            ))}
+                                        </ul>
+                                        <h3>Total Amount: <Price>{d.totalPrice}</Price></h3>
+                                    </div>
+                                );
+                            })
+                        }
+                    </div>
+                </Container>
+                :
+                <div style={{ textAlign: 'center' }}>
+                    <h2>No orders.</h2>
                 </div>
-            </Container>
     );
 }
 
