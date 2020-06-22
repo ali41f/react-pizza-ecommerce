@@ -1,26 +1,66 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import { Switch, Route, withRouter } from "react-router-dom";
+import Login from './Pages/Auth/Login'
+import Register from './Pages/Auth/Register'
+import { auth } from './firebase'
+import { connect } from "react-redux";
+import { setUser, clearUser } from './store/Auth/userActions'
+import Home from './Pages/Home'
+import Header from './Components/Header'
+import Checkout from './Pages/Checkout'
+import Orders from './Pages/Orders'
+import { AnimatePresence } from 'framer-motion';
 
-function App() {
+const RouterApp = (props) => {
+
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        props.setUser(user)
+        //props.history.push('/')
+      } else {
+        props.clearUser()
+      }
+    })
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      <AnimatePresence exitBeforeEnter>
+        <Switch>
+          <Route path="/register">
+            <Register history={props.history} />
+          </Route>
+          <Route path="/login">
+            <Login history={props.history} />
+          </Route>
+          <Route path="/checkout">
+            <Checkout />
+          </Route>
+          <Route path="/orders">
+            <Orders />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </AnimatePresence>
+    </>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  isLoading: state.user.isLoading
+})
+
+const mapDispatchToProps = { setUser, clearUser };
+
+// used withRouter for history object
+const App = withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(RouterApp)
+)
+
+export default App
