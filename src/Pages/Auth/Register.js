@@ -68,7 +68,7 @@ const Register = (props) => {
         setErrors([])
         setLoading(true)
         if (isFormValid()) {
-            console.log("clearing errors")
+
             auth.createUserWithEmailAndPassword(state.email, state.password)
                 .then(createdUser => {
                     console.log(createdUser)

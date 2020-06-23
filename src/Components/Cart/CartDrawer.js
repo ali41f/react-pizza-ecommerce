@@ -83,15 +83,15 @@ class CartDrawer extends Component {
 
     removeProduct = product => {
         const { cartProducts, updateCart } = this.props;
-        console.log(product)
-        console.log(cartProducts)
+        //console.log(product)
+        //console.log(cartProducts)
         const index = cartProducts.findIndex(cp =>
             (_.isEqual(cp.toppings, product.toppings) && (cp.id === product.id) && (cp.base === product.base))
         );
         if (index >= 0) {
             //console.log(cartProducts)
             cartProducts.splice(index, 1);
-            console.log(index)
+            //console.log(index)
             updateCart(cartProducts);
         } else {
             console.log("Could not find product to remove")
