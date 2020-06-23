@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import { withRouter, Link } from "react-router-dom";
 import { auth } from '../firebase'
+import { setMessage } from '../store/Auth/userActions'
 
 
 const Account = (props) => {
@@ -28,9 +29,9 @@ const Account = (props) => {
 
     const signOutHandler = () => {
         auth.signOut().then(function () {
-            // Sign-out successful.
+            props.setMessage("You are logged out.")
         }).catch(function (error) {
-            // An error happened.
+            props.setMessage("Couldn't logout. Please try again")
         });
         setOpen(false)
     }
@@ -100,5 +101,5 @@ const mapStateToProps = (state) => ({
 })
 
 export default withRouter(
-    connect(mapStateToProps)(Account)
+    connect(mapStateToProps, { setMessage })(Account)
 )

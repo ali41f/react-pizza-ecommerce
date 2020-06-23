@@ -14,6 +14,7 @@ import { motion } from 'framer-motion';
 import { containerVariants } from '../../utils/Variants'
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { setMessage } from '../../store/Auth/userActions'
 
 const Register = (props) => {
     const classes = useStyles();
@@ -76,7 +77,8 @@ const Register = (props) => {
                         photoURL: `http://gravatar.com/avatar/${md5(createdUser.user.email)}?d=identicon`
                     }).then(() => {
                         saveUser(createdUser).then(() => {
-                            console.log("user saved in db")
+                            console.log(createdUser)
+                            props.setMessage("Welcome to Pizzashop.")
                             //props.history.push('/')
                         }).catch(err => {
                             console.log(err)
@@ -189,5 +191,5 @@ const mapStateToProps = (state) => ({
 })
 
 export default withRouter(
-    connect(mapStateToProps)(Register)
+    connect(mapStateToProps, { setMessage })(Register)
 )

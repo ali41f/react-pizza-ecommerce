@@ -1,8 +1,9 @@
-import { SET_USER, CLEAR_USER } from './types'
+import { SET_USER, CLEAR_USER, SET_MESSAGE } from './types'
 
 const initialUserState = {
     currentUser: null,
-    isLoading: true
+    isLoading: true,
+    message: ''
 }
 
 const userReducer = (state = initialUserState, action) => {
@@ -10,8 +11,8 @@ const userReducer = (state = initialUserState, action) => {
     switch (action.type) {
 
         case SET_USER:
-            console.log(action.payload.currentUser)
             return {
+                ...state,
                 currentUser: action.payload.currentUser,
                 isLoading: false
             }
@@ -21,6 +22,12 @@ const userReducer = (state = initialUserState, action) => {
                 currentUser: null,
                 isLoading: false
             }
+
+        case SET_MESSAGE:
+            return {
+                ...state,
+                message: action.payload
+            };
         default:
             return state
     }

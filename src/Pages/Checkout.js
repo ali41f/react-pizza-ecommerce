@@ -13,6 +13,7 @@ import { motion } from 'framer-motion';
 import { containerVariants } from '../utils/Variants'
 import Container from '@material-ui/core/Container';
 import { connect } from 'react-redux'
+import { setMessage } from "../store/Auth/userActions"
 
 
 const Checkout = (props) => {
@@ -59,6 +60,7 @@ const Checkout = (props) => {
                         console.log("createdOrder")
                         props.resetProducts()
                         props.resetData()
+                        props.setMessage("We have received your order.")
                         props.currentUser == null ?
                             props.history.push('/') :
                             props.history.push('/orders')
@@ -160,5 +162,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(
-    mapStateToProps, { resetProducts, resetData }
+    mapStateToProps, { resetProducts, resetData, setMessage }
 )(withRouter(Checkout));

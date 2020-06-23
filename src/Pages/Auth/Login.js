@@ -10,6 +10,7 @@ import useStyles from './authStyle'
 import { auth } from '../../firebase'
 import { Alert } from '@material-ui/lab';
 
+import { setMessage } from '../../store/Auth/userActions'
 import { motion } from 'framer-motion';
 import { containerVariants } from '../../utils/Variants'
 import Container from '@material-ui/core/Container';
@@ -45,7 +46,7 @@ const Login = (props) => {
             setLoading(true)
             auth.signInWithEmailAndPassword(state.email, state.password)
                 .then(signedInUser => {
-                    console.log(signedInUser)
+                    props.setMessage("You have successfully signed in.")
                     //props.history.push('/')
                 })
                 .catch(err => {
@@ -127,5 +128,5 @@ const mapStateToProps = (state) => ({
 })
 
 export default withRouter(
-    connect(mapStateToProps)(Login)
+    connect(mapStateToProps, { setMessage })(Login)
 )

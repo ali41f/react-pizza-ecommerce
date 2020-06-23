@@ -1,9 +1,8 @@
-import * as actionTypes from './types';
+import { SET_USER, CLEAR_USER, SET_MESSAGE } from './types';
 
 export const setUser = user => {
-    console.log(actionTypes.SET_USER)
     return {
-        type: actionTypes.SET_USER,
+        type: SET_USER,
         payload: {
             currentUser: user
         }
@@ -12,6 +11,11 @@ export const setUser = user => {
 
 export const clearUser = () => {
     return {
-        type: actionTypes.CLEAR_USER
+        type: CLEAR_USER
     }
 }
+
+export const setMessage = msg => ({
+    type: SET_MESSAGE,
+    payload: msg
+});

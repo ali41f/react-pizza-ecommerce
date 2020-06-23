@@ -10,10 +10,10 @@ export const linkVariants = {
 
 export const containerVariants = {
     hidden: {
-        x: '100vw'
+        y: '100vw'
     },
     visible: {
-        x: 0,
+        y: 0,
         transition: { type: 'spring', stiffness: 30 },
     },
     exit: {

@@ -13,6 +13,7 @@ import _ from 'lodash';
 import Price from '../Price';
 import { Link } from 'react-router-dom';
 import withWidth from '@material-ui/core/withWidth';
+import { setMessage } from "../../store/Auth/userActions"
 
 const useStyles = theme => ({
     list: {
@@ -62,8 +63,9 @@ class CartDrawer extends Component {
 
 
     addProduct = product => {
-        const { cartProducts, updateCart } = this.props;
+        const { cartProducts, updateCart, setMessage } = this.props;
         let productAlreadyInCart = false;
+        setMessage("Pizza added to cart.")
 
         cartProducts.forEach(cp => {
             if (_.isEqual(cp.toppings, product.toppings) && (cp.id === product.id) && (cp.base === product.base)) {
@@ -187,5 +189,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    { loadCart, updateCart, removeProduct, changeProductQuantity }
+    { loadCart, updateCart, removeProduct, changeProductQuantity, setMessage }
 )(withStyles(useStyles)(withWidth()(CartDrawer)));

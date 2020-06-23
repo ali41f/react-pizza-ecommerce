@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { setUser, clearUser } from './store/Auth/userActions'
 import Home from './Pages/Home'
 import Header from './Components/Header'
+import Message from './Components/Message'
 import Checkout from './Pages/Checkout'
 import Orders from './Pages/Orders'
 import { AnimatePresence } from 'framer-motion';
@@ -19,7 +20,7 @@ const RouterApp = (props) => {
     auth.onAuthStateChanged(user => {
       if (user) {
         props.setUser(user)
-        //props.history.push('/')
+        //props.setMessage('You have successfully signed in.')
       } else {
         props.clearUser()
       }
@@ -28,6 +29,7 @@ const RouterApp = (props) => {
 
   return (
     <>
+      <Message />
       <Header />
       <AnimatePresence exitBeforeEnter>
         <Switch>
