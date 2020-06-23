@@ -48,7 +48,7 @@ const SelectPizza = ({ handleAddToCart, addBase, pizza, addTopping, setQuantity,
                             <TextField
                                 label="Quantity"
                                 type="number"
-                                value={pizza.quantity}
+                                placeholder="1"
                                 onChange={setQuantity}
                             />
                         </Grid>

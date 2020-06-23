@@ -48,8 +48,11 @@ const Home = (props) => {
     }
 
     const setQuantity = (event) => {
-        if (parseInt(event.target.value) > 0) {
-            setPizza({ ...pizza, quantity: parseInt(event.target.value) })
+        let amount = parseInt(event.target.value)
+        if (amount > 0) {
+            setPizza({ ...pizza, quantity: amount })
+        } else {
+            setPizza({ ...pizza, quantity: 1 })
         }
     }
 

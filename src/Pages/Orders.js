@@ -14,14 +14,14 @@ const Orders = (props) => {
     useEffect(() => {
         auth.onAuthStateChanged(user => {
             if (user) {
-                console.log(user.email)
+                //console.log(user.email)
                 db.collection("orders").where("email", "==", user.email).get()
                     .then(function (querySnapshot) {
                         setLoading(false)
-                        console.log(querySnapshot)
+                        //console.log(querySnapshot)
                         querySnapshot.forEach(function (doc) {
                             // doc.data() is never undefined for query doc snapshots
-                            console.log(doc.id, " => ", doc.data());
+                            //console.log(doc.id, " => ", doc.data());
                             setData(prevData => prevData.concat(doc.data()))
                         });
                     });
