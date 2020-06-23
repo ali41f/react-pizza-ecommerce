@@ -154,6 +154,7 @@ class CartDrawer extends Component {
                         <h3 className="subtotalCart">
                             SUBTOTAL: <Price>{cartTotal.totalPrice}</Price>
                         </h3>
+                        <span className="shippingCart">Includes <Price>2</Price> shipping cost</span>
                         <Link to='/checkout'>
                             <Button
                                 onClick={this.props.toggleDrawer("right", false)}

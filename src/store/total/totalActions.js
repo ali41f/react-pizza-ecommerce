@@ -11,6 +11,7 @@ export const updateCart = cartProducts => dispatch => {
     return sum;
   }, 0);
 
+  totalPrice += 2; // shipping cost
 
   let cartTotal = {
     productQuantity,
